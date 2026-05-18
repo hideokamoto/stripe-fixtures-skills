@@ -20,7 +20,7 @@ Claude Code、Cursor、その他対応エージェント向けの **Agent Skill*
 
 - **`stripe trigger` で足りるか**の撤退判定（SKILL.md Phase 0）
 - fixture JSON の生成・ひな型からの合成
-- 静的検証（参照の順序、`${name}` 整合、`path` の形式、`template_version` など）
+- 静的検証（参照の順序、`${name}` 整合、`path` の形式、`_meta.template_version` など）
 - pitfalls への警告
 
 **担わないこと**
