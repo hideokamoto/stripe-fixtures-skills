@@ -72,7 +72,7 @@ export interface LocaleContent {
   };
 }
 
-const GITHUB_URL = 'https://github.com/hideokamoto/stripe-fixtures-skills';
+export const githubUrl = 'https://github.com/hideokamoto/stripe-fixtures-skills';
 
 export const content: Record<Lang, LocaleContent> = {
   en: {
@@ -378,4 +378,3 @@ export const content: Record<Lang, LocaleContent> = {
   },
 };
 
-export const githubUrl = GITHUB_URL;

@@ -10,17 +10,20 @@
   --accent-2: #635bff;
   --green: #4ade80;
   --red: #f87171;
-  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Hiragino Sans", "Noto Sans JP", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Fira Code", "Menlo", "Consolas", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Hiragino Sans", "Noto Sans JP", "Arial", sans-serif;
   --maxw: 1080px;
 }
 
 * { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
-  /* CJK + latin spacing nicety */
+  /* Progressive enhancement for CJK/Latin spacing (CSS Text Level 4, Chromium-only for now) */
   text-autospace: normal;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
 }
 
 body {
@@ -120,7 +123,7 @@ h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: 0 0 0.5rem; }
   text-align: left;
   color: var(--text);
 }
-.code .prompt { color: var(--accent); }
+.code .prompt { color: var(--accent); user-select: none; }
 .install-inline {
   max-width: 620px; margin: 0 auto;
   display: flex; align-items: center; gap: 0.5rem;
@@ -150,7 +153,7 @@ h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: 0 0 0.5rem; }
   white-space: pre;
 }
 .terminal .pre > div { min-height: 1.3em; }
-.terminal .c-prompt { color: var(--accent); }
+.terminal .c-prompt { color: var(--accent); user-select: none; }
 .terminal .c-ok { color: var(--green); }
 .terminal .c-dim { color: var(--muted); }
 
