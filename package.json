@@ -1,0 +1,21 @@
+{
+  "name": "stripe-fixtures-skills",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Monorepo root: delegates typecheck/test/deploy to the site/ Astro workspace for CI (CircleCI -> Cloudflare Workers).",
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "typecheck": "pnpm --filter stripe-fixtures-site typecheck",
+    "test": "pnpm --filter stripe-fixtures-site test",
+    "build": "pnpm --filter stripe-fixtures-site build",
+    "deploy": "pnpm --filter stripe-fixtures-site deploy"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "workerd"
+    ]
+  }
+}

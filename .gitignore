@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# test results (generated for CircleCI store_test_results)
+reports/
+
+# Cloudflare Wrangler
+.wrangler/
+.dev.vars*
+
+# Astro generated types
+.astro/
+
+# environment
+.env
+.env.production
+
+# logs
+npm-debug.log*
+
+# macOS
+.DS_Store

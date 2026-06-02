@@ -13,12 +13,17 @@ can be added later under `/docs`.
 
 ## Local development
 
+This package is part of a pnpm workspace rooted at the repo. Install once from the
+repo root, then run scripts here (or via `pnpm --filter stripe-fixtures-site <script>`):
+
 ```bash
+pnpm install       # run from the repo root (installs all workspaces)
 cd site
-npm install
-npm run dev        # http://localhost:4321
-npm run build      # static output → dist/
-npm run preview    # serve the built site
+pnpm run dev       # http://localhost:4321
+pnpm run build     # static output → dist/
+pnpm run preview   # serve the built site
+pnpm run typecheck # astro check
+pnpm run test      # vitest (JUnit → ../reports/results.xml)
 ```
 
 ## Content & i18n
@@ -34,15 +39,28 @@ language-agnostic and render from that object, so adding/editing copy never touc
 Update `site` in [`astro.config.mjs`](astro.config.mjs) to the production URL so canonical
 and `hreflang` links resolve correctly.
 
-## Deploy (Cloudflare Pages)
+## Deploy (Cloudflare Workers — static assets)
 
-Static output — no adapter required.
+The site is purely pre-rendered, so it ships via [Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/):
+no adapter and no Worker script. [`wrangler.jsonc`](wrangler.jsonc) points `assets.directory`
+at `./dist`, and Cloudflare serves those files directly.
 
-| Setting | Value |
-|---|---|
-| Framework preset | Astro |
-| Root directory | `site` |
-| Build command | `npm run build` |
-| Build output directory | `dist` |
+CI (CircleCI) deploys on every push to `main` by running, from the repo root:
 
-The same `dist/` deploys to GitHub Pages, Netlify, Vercel, or any static host.
+```bash
+pnpm run deploy    # → site: astro build && wrangler deploy
+```
+
+`wrangler deploy` authenticates from the `CLOUDFLARE_API_TOKEN` (and, if needed,
+`CLOUDFLARE_ACCOUNT_ID`) environment variables, which CircleCI supplies via the
+`cloudflare` context attached to the `deploy-production` job.
+
+To deploy by hand:
+
+```bash
+cd site
+pnpm run build
+pnpm exec wrangler deploy
+```
+
+The same `dist/` also works on GitHub Pages, Netlify, Vercel, or any static host.
